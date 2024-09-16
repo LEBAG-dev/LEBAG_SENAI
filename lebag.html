@@ -255,65 +255,66 @@
         Entre em contato conosco: <a href="mailto:mindfulemotionslebag@gmail.com">mindfulemotionslebag@gmail.com</a>
     </footer>
     <script>
-        function calculateResults() {
-            // Calculate scores
-            let depressionScore = 0;
-            let anxietyScore = 0;
-            let stressScore = 0;
+    function calculateResults() {
+        // Calculate scores
+        let depressionScore = 0;
+        let anxietyScore = 0;
+        let stressScore = 0;
 
-            for (let i = 1; i <= 21; i++) {
-                let selectedOption = document.querySelector(input[name="q${i}"]:checked);
-                if (selectedOption) {
-                    let value = parseInt(selectedOption.value);
-                    // Distribute questions to scales
-                    if (i <= 7) {
-                        anxietyScore += value;
-                    } else if (i <= 14) {
-                        stressScore += value;
-                    } else {
-                        depressionScore += value;
-                    }
+        for (let i = 1; i <= 21; i++) {
+            let selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selectedOption) {
+                let value = parseInt(selectedOption.value);
+                // Distribute questions to scales
+                if (i <= 7) {
+                    anxietyScore += value;
+                } else if (i <= 14) {
+                    stressScore += value;
+                } else {
+                    depressionScore += value;
                 }
             }
-
-            // Convert scores to standard scale
-            let depressionStandard = depressionScore * 2;
-            let anxietyStandard = anxietyScore * 2;
-            let stressStandard = stressScore * 2;
-
-            // Interpret results
-            let depressionInterpretation = interpretScore(depressionStandard, 'depression');
-            let anxietyInterpretation = interpretScore(anxietyStandard, 'anxiety');
-            let stressInterpretation = interpretScore(stressStandard, 'stress');
-
-            // Display results
-            document.getElementById('depression-result').innerText = Depressão: ${depressionStandard} (${depressionInterpretation});
-            document.getElementById('anxiety-result').innerText = Ansiedade: ${anxietyStandard} (${anxietyInterpretation});
-            document.getElementById('stress-result').innerText = Estresse: ${stressStandard} (${stressInterpretation});
-            document.getElementById('result').style.display = 'block';
         }
 
-        function interpretScore(score, type) {
-            if (type === 'depression') {
-                if (score <= 9) return 'Normal';
-                if (score <= 13) return 'Leve';
-                if (score <= 20) return 'Moderada';
-                if (score <= 27) return 'Severa';
-                return 'Extremamente severa';
-            } else if (type === 'anxiety') {
-                if (score <= 7) return 'Normal';
-                if (score <= 9) return 'Leve';
-                if (score <= 14) return 'Moderada';
-                if (score <= 19) return 'Severa';
-                return 'Extremamente severa';
-            } else if (type === 'stress') {
-                if (score <= 14) return 'Normal';
-                if (score <= 18) return 'Leve';
-                if (score <= 25) return 'Moderada';
-                if (score <= 33) return 'Severa';
-                return 'Extremamente severa';
-            }
+        // Convert scores to standard scale
+        let depressionStandard = depressionScore * 2;
+        let anxietyStandard = anxietyScore * 2;
+        let stressStandard = stressScore * 2;
+
+        // Interpret results
+        let depressionInterpretation = interpretScore(depressionStandard, 'depression');
+        let anxietyInterpretation = interpretScore(anxietyStandard, 'anxiety');
+        let stressInterpretation = interpretScore(stressStandard, 'stress');
+
+        // Display results
+        document.getElementById('depression-result').innerText = `Depressão: ${depressionStandard} (${depressionInterpretation})`;
+        document.getElementById('anxiety-result').innerText = `Ansiedade: ${anxietyStandard} (${anxietyInterpretation})`;
+        document.getElementById('stress-result').innerText = `Estresse: ${stressStandard} (${stressInterpretation})`;
+        document.getElementById('result').style.display = 'block';
+    }
+
+    function interpretScore(score, type) {
+        if (type === 'depression') {
+            if (score <= 9) return 'Normal';
+            if (score <= 13) return 'Leve';
+            if (score <= 20) return 'Moderada';
+            if (score <= 27) return 'Severa';
+            return 'Extremamente severa';
+        } else if (type === 'anxiety') {
+            if (score <= 7) return 'Normal';
+            if (score <= 9) return 'Leve';
+            if (score <= 14) return 'Moderada';
+            if (score <= 19) return 'Severa';
+            return 'Extremamente severa';
+        } else if (type === 'stress') {
+            if (score <= 14) return 'Normal';
+            if (score <= 18) return 'Leve';
+            if (score <= 25) return 'Moderada';
+            if (score <= 33) return 'Severa';
+            return 'Extremamente severa';
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
