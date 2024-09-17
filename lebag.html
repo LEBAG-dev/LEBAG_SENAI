@@ -1,4 +1,5 @@
-<html lang="pt-BR"></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -255,66 +256,64 @@
         Entre em contato conosco: <a href="mailto:mindfulemotionslebag@gmail.com">mindfulemotionslebag@gmail.com</a>
     </footer>
     <script>
-    function calculateResults() {
-        // Calculate scores
-        let depressionScore = 0;
-        let anxietyScore = 0;
-        let stressScore = 0;
+        function calculateResults() {
+            let depressionScore = 0;
+            let anxietyScore = 0;
+            let stressScore = 0;
 
-        for (let i = 1; i <= 21; i++) {
-            let selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
-            if (selectedOption) {
-                let value = parseInt(selectedOption.value);
-                // Distribute questions to scales
-                if (i <= 7) {
-                    anxietyScore += value;
-                } else if (i <= 14) {
-                    stressScore += value;
-                } else {
-                    depressionScore += value;
+            for (let i = 1; i <= 21; i++) {
+                let selectedOption = document.querySelector('input[name="q' + i + '"]:checked');
+                if (selectedOption) {
+                    let value = parseInt(selectedOption.value);
+                    // Distribuição das perguntas pelas escalas
+                    if (i === 3 || i === 5 || i === 10 || i === 13 || i === 16 || i === 17 || i === 21) {
+                        depressionScore += value;
+                    } else if (i === 2 || i === 4 || i === 7 || i === 9 || i === 15 || i === 19 || i === 20) {
+                        anxietyScore += value;
+                    } else {
+                        stressScore += value;
+                    }
                 }
             }
+
+            // Converter pontuação para a escala padrão
+            let depressionStandard = depressionScore * 2;
+            let anxietyStandard = anxietyScore * 2;
+            let stressStandard = stressScore * 2;
+
+            // Interpretar resultados
+            let depressionInterpretation = interpretScore(depressionStandard, 'depression');
+            let anxietyInterpretation = interpretScore(anxietyStandard, 'anxiety');
+            let stressInterpretation = interpretScore(stressStandard, 'stress');
+
+            // Exibir resultados
+            document.getElementById('depression-result').innerText = `Depressão: ${depressionStandard} (${depressionInterpretation})`;
+            document.getElementById('anxiety-result').innerText = `Ansiedade: ${anxietyStandard} (${anxietyInterpretation})`;
+            document.getElementById('stress-result').innerText = `Estresse: ${stressStandard} (${stressInterpretation})`;
+            document.getElementById('result').style.display = 'block';
         }
 
-        // Convert scores to standard scale
-        let depressionStandard = depressionScore * 2;
-        let anxietyStandard = anxietyScore * 2;
-        let stressStandard = stressScore * 2;
-
-        // Interpret results
-        let depressionInterpretation = interpretScore(depressionStandard, 'depression');
-        let anxietyInterpretation = interpretScore(anxietyStandard, 'anxiety');
-        let stressInterpretation = interpretScore(stressStandard, 'stress');
-
-        // Display results
-        document.getElementById('depression-result').innerText = `Depressão: ${depressionStandard} (${depressionInterpretation})`;
-        document.getElementById('anxiety-result').innerText = `Ansiedade: ${anxietyStandard} (${anxietyInterpretation})`;
-        document.getElementById('stress-result').innerText = `Estresse: ${stressStandard} (${stressInterpretation})`;
-        document.getElementById('result').style.display = 'block';
-    }
-
-    function interpretScore(score, type) {
-        if (type === 'depression') {
-            if (score <= 9) return 'Normal';
-            if (score <= 13) return 'Leve';
-            if (score <= 20) return 'Moderada';
-            if (score <= 27) return 'Severa';
-            return 'Extremamente severa';
-        } else if (type === 'anxiety') {
-            if (score <= 7) return 'Normal';
-            if (score <= 9) return 'Leve';
-            if (score <= 14) return 'Moderada';
-            if (score <= 19) return 'Severa';
-            return 'Extremamente severa';
-        } else if (type === 'stress') {
-            if (score <= 14) return 'Normal';
-            if (score <= 18) return 'Leve';
-            if (score <= 25) return 'Moderada';
-            if (score <= 33) return 'Severa';
-            return 'Extremamente severa';
+        function interpretScore(score, type) {
+            if (type === 'depression') {
+                if (score <= 9) return 'Normal';
+                if (score <= 13) return 'Leve';
+                if (score <= 20) return 'Moderada';
+                if (score <= 27) return 'Severa';
+                return 'Extremamente severa';
+            } else if (type === 'anxiety') {
+                if (score <= 7) return 'Normal';
+                if (score <= 9) return 'Leve';
+                if (score <= 14) return 'Moderada';
+                if (score <= 19) return 'Severa';
+                return 'Extremamente severa';
+            } else if (type === 'stress') {
+                if (score <= 14) return 'Normal';
+                if (score <= 18) return 'Leve';
+                if (score <= 25) return 'Moderada';
+                if (score <= 33) return 'Severa';
+                return 'Extremamente severa';
+            }
         }
-    }
     </script>
-
 </body>
 </html>
